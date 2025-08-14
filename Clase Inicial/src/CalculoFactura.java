@@ -19,7 +19,7 @@ public class CalculoFactura {
         Scanner sc = new Scanner(System.in);
         Factura factura = new Factura();
 
-        // a) Datos de cabecera de factura
+     
         System.out.print("Ingrese la fecha: ");
         factura.setFecha(sc.nextLine());
 
@@ -39,18 +39,18 @@ public class CalculoFactura {
         } while (!(tipoPago.equals("C") || tipoPago.equals("TC") || tipoPago.equals("TD")));
         factura.setTipoPago(tipoPago);
 
-        // b) Cantidad de artículos
+       
         int cantArticulos;
         do {
             System.out.print("Ingrese la cantidad de artículos a facturar: ");
             cantArticulos = Integer.parseInt(sc.nextLine());
         } while (cantArticulos <= 0);
 
-        // c) Dimensionar itemsFactura
+       
         String[][] items = new String[cantArticulos][5];
         factura.setItemsFactura(items);
 
-        // d) Carga de artículos
+        
         double totalItems = 0;
         for (int i = 0; i < cantArticulos; i++) {
             System.out.println("\nArtículo " + (i + 1) + ":");
@@ -62,12 +62,12 @@ public class CalculoFactura {
                 if (articulo == null) {
                     System.out.println("El código ingresado es incorrecto.");
                 } else {
-                    // Asignar código, denominación y precio
-                    items[i][0] = articulo[0]; // código
-                    items[i][1] = articulo[1]; // denominación
-                    items[i][2] = articulo[2]; // precio unitario
+                    
+                    items[i][0] = articulo[0]; 
+                    items[i][1] = articulo[1]; 
+                    items[i][2] = articulo[2]; 
 
-                    // Pedir cantidad
+                  
                     double cantidad = 0;
                     boolean valida = false;
                     while (!valida) {
@@ -88,7 +88,7 @@ public class CalculoFactura {
 
                     items[i][3] = String.valueOf(cantidad);
 
-                    // Subtotal
+                
                     double precio = Double.parseDouble(articulo[2]);
                     double subtotal = precio * cantidad;
                     items[i][4] = String.valueOf(subtotal);
@@ -98,10 +98,10 @@ public class CalculoFactura {
             }
         }
 
-        // e) Calcular monto total de ítems
+       
         factura.setMontoTotalItems(totalItems);
 
-        // f) Calcular recargo
+      
         double recargo = 0;
         if (factura.getTipoPago().equals("TD")) {
             recargo = totalItems * 0.05;
@@ -110,10 +110,10 @@ public class CalculoFactura {
         }
         factura.setRecargo(recargo);
 
-        // g) Calcular monto final
+       
         factura.setMontoFinal(totalItems + recargo);
 
-        // h) Mostrar ticket
+        
         System.out.println("\n==============================");
         System.out.println("El ticket a pagar es: $" + factura.getMontoFinal());
         System.out.println("==============================");
@@ -127,6 +127,7 @@ public class CalculoFactura {
         return null;
     }
 }
+
 
 
 
